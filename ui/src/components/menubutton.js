@@ -8,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Confirmlogout from "./Confirmlogout";
 import { useractions } from "../store/user";
 import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core";
 import {
   AccountBoxOutlined,
   ArrowDropDownCircleOutlined,
@@ -48,11 +49,19 @@ const StyledMenuItem = withStyles((theme) => ({
     },
   },
 }))(MenuItem);
+const useStyles=makeStyles({
+  menubutton:{
+    textDecoration:"none",
+    color:(props)=>props?"white":"black"
+  }
+})
 
 export default function Menubutton() {
   const [show, setshow] = useState(false);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
+   const data=useSelector((state)=>state.mode)
+  const classes=useStyles(data.mode)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -99,7 +108,7 @@ export default function Menubutton() {
         onClose={handleClose}
       >
         <Link
-          style={{ textDecoration: "none",color:"none"}}
+          className={classes.menubutton}
           to="/account/Order"
         >
           <StyledMenuItem>
@@ -110,7 +119,7 @@ export default function Menubutton() {
           <ListItemText primary="Logout" />
         </StyledMenuItem>
         <Link
-          style={{ textDecoration: "none" }}
+            className={classes.menubutton}
           to="/account/userprofile"
         >
           <StyledMenuItem>
@@ -119,7 +128,7 @@ export default function Menubutton() {
           </StyledMenuItem>
         </Link>
         <Link
-          style={{ textDecoration: "none" }}
+            className={classes.menubutton}
           to="/account/wishlist"
         >
           <StyledMenuItem>

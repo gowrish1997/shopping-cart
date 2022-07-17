@@ -140,7 +140,7 @@ const Login = styled.div`
   align-items: center;
 `;
 const useStyles=makeStyles({
-accordian:{
+accord:{
   backgroundColor:"red",
   color:props=>props?"white":"black",
 }
@@ -197,8 +197,9 @@ const classes=useStyles(data.mode)
   
   return (
     <div>
+      
       {show && <Confirmlogout handler={Logoutmodel_handler}></Confirmlogout>}
-      <Accordion style={{ marginTop: "20px"}} className={classes.accordian} >
+      <Accordion style={{ marginTop: "20px"}} className={classes.accord} >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
