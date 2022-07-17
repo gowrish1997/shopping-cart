@@ -99,7 +99,7 @@ export default function Menubutton() {
         onClose={handleClose}
       >
         <Link
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: "none",color:"none"}}
           to="/account/Order"
         >
           <StyledMenuItem>
@@ -110,7 +110,7 @@ export default function Menubutton() {
           <ListItemText primary="Logout" />
         </StyledMenuItem>
         <Link
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: "none" }}
           to="/account/userprofile"
         >
           <StyledMenuItem>
@@ -119,7 +119,7 @@ export default function Menubutton() {
           </StyledMenuItem>
         </Link>
         <Link
-          style={{ textDecoration: "none", color: "black" }}
+          style={{ textDecoration: "none" }}
           to="/account/wishlist"
         >
           <StyledMenuItem>

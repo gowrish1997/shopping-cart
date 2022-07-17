@@ -8,7 +8,10 @@ import Navigation from "../components/Navigation";
 import Announcement from "../components/Announcement";
 import styled from "styled-components";
 import { wishlistaction } from "../store/Wishlist";
-const Container = styled.div``;
+const Container = styled.div`
+height: 100vh;
+overflow: auto;
+`;
 const Wishlist_container = styled.div`
   display: flex;
   flex-direction: row;

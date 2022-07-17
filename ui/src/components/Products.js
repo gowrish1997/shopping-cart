@@ -72,7 +72,7 @@ const Products = ({ item }) => {
       <Image src={item.img}></Image>
       <Info>
         <Icon>
-          <ShoppingCartOutlined></ShoppingCartOutlined>
+          <ShoppingCartOutlined style={{color:"black"}}></ShoppingCartOutlined>
         </Icon>
         <Link to={`/Product/${item._id}`}>
           <Icon>
@@ -80,7 +80,7 @@ const Products = ({ item }) => {
           </Icon>
         </Link>
         <Icon onClick={addwishlist}>
-          <FavoriteOutlined></FavoriteOutlined>
+          <FavoriteOutlined style={{color:"black"}}></FavoriteOutlined>
         </Icon>
       </Info>
     </Container>

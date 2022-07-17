@@ -51,10 +51,12 @@ const Bottom = styled.div`
 `;
 const Info = styled.div`
   flex: 3;
-  border: 1px solid grey;
+  border: 1px solid;
+  border-color: ${(props)=>(props.data.mode?"white":"black")};
   box-sizing: border-box;
   margin-right: 10px;
- background-color: rgb(245,245,245);
+  /* background-color: rgb(245,245,245);  */
+  background-color:${(props)=>(props.data.mode?"":"rgb(245,245,245)")} ; 
  ${mobile({ width:"100%",borderRadius:"20px"})}
 `;
 const Product = styled.div`
@@ -79,6 +81,7 @@ const Pricedetail = styled.div`
   align-items: center;
 `;
 const Img = styled.img`
+margin:0px 0px 0px 10px;
   width: 30%;
 `;
 const Details = styled.div`
@@ -111,7 +114,8 @@ const Summary = styled.div`
   flex-direction: column;
   padding: 0px 40px;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 1px solid ;
+    
   border-radius: 10px;
   height: 50vh;
 `;
@@ -145,7 +149,9 @@ background-color: teal;
 const Ordermenu=styled.div`
 position: sticky;
 bottom: 0px;
-background-color: white;
+border-top: 1px solid ;
+border-color: ${(props)=>(props.data.mode?"white":"black")};
+/* background-color: white; */
 display: flex;
 justify-content: flex-end;
 padding: 10px;
@@ -167,7 +173,7 @@ const Cart = () => {
   const wishlist=useSelector((state)=>state.wishlist)
   const cartproducts = selector.product;
   const user = useSelector((state) => state.user);
-  console.log(cartproducts);
+ const data=useSelector((state)=>state.mode)
   useEffect(() => {
     console.log("use effect running")
     user.user && dispatch(cartaddhanlder(user.user._id));
@@ -220,7 +226,7 @@ const Cart = () => {
           {/* <Topbutton style={{cursor:"pointer"}} type="filled">CHECK OUT NOW</Topbutton> */}
         </Top>
         <Bottom>
-          <Info>
+          <Info data={data}>
             {cartproducts.length <= 0 ? (
               <Emptycart> </Emptycart>
             ) : (
@@ -270,10 +276,10 @@ const Cart = () => {
                 );
               })
             )}
-            <Link style={{ textDecoration: 'none'}} to='Cart/MyOrder'><Ordermenu><Orderbutton >PLACE ORDER</Orderbutton></Ordermenu></Link>
+            <Link style={{ textDecoration: 'none'}} to='Cart/MyOrder'><Ordermenu data={data}><Orderbutton >PLACE ORDER</Orderbutton></Ordermenu></Link>
           </Info>
           {cartproducts.length>0 &&
-          <Summary>
+          <Summary data={data}>
             <Summarytitle>ORDER SUMMARY</Summarytitle>
             <Summarytext>
               <Summartytextdetail>Sub total</Summartytextdetail>

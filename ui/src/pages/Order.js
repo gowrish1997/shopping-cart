@@ -7,14 +7,16 @@ import { Orderupdate_handler } from "../store/Order";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { mobile } from "../components/responsive";
+import { useSlider } from "@mui/base";
 const Products_container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
   width: 60%;
   margin-left: auto;
-  margin-right: auto;
-  background-color: #f5f5f5;
+margin-right: auto;
+
+  background-color:${(props)=>props.data.mode?'':"#f5f5f5"} ;
   margin-top: 10px;
   box-sizing: border-box;
   ${mobile({ width:"100%"})}
@@ -23,7 +25,9 @@ const Product_container = styled.div`
   display: flex;
   flex-direction: row;
   height: 20vh;
-  background-color: white;
+  border:1px solid ;
+  border-color: ${(props)=>props.data.mode?'white':"transparent"};
+  background-color:${(props)=>props.data.mode?'':"white"} ;
   width: 100%;
   border-radius: 10px;
   padding: 10px;
@@ -46,17 +50,14 @@ const Product_detail = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
-  align-items: flex-start;
+align-items: flex-start;
   width: 100%;
   height: 100%;
   box-shadow: none;
-
-  border: none;
+border: none;
   font-size: 14px;
   text-decoration: none;
-
-  color: #696969;
+color:${(props)=>props.data.mode?'':"#696969"} ;
   margin-bottom: 10px;
 `;
 const Product_price = styled.div`
@@ -72,7 +73,8 @@ const Product_confirmation = styled.div`
   flex-direction: column;
 `;
 const Container = styled.div`
-
+height: 100vh;
+overflow: auto;
 `;
 const Statua_contaierr = styled.div`
   display: flex;
@@ -93,8 +95,8 @@ const Ordered_date = styled.div`
 `;
 const Order = () => {
   const product = useSelector((state) => state.order);
-  console.log(product);
-  const user = useSelector((state) => state.user);
+ const user = useSelector((state) => state.user);
+ const data=useSelector((state)=>state.mode)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(Orderupdate_handler(user.user._id));
@@ -105,14 +107,15 @@ const Order = () => {
       <Navigation></Navigation>
       <Announcement></Announcement>
       {product ? (
-        <Products_container>
+        
+        <Products_container data={data}>
           {product.Order_product.map((item) => {
             return (
-              <Product_container>
+              <Product_container data={data}>
                 <Product_imagecontainer>
                   <Image src={item.img}></Image>
                 </Product_imagecontainer>
-                <Product_detail>
+                <Product_detail data={data}>
                   <div style={{ fontSize: "20px", fontWweight: "bold" }}>
                     {item.title}
                   </div>
@@ -134,7 +137,9 @@ const Order = () => {
               </Product_container>
             );
           })}
+          
         </Products_container>
+       
       ) : (
         "Nothing to show here please do shopping"
       )}

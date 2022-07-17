@@ -16,7 +16,7 @@ const Container = styled.div`
   flex-direction: row;
   ${mobile({  flexDirection:"column"})}
   padding: 10px;
-  background-color: #fff5ee;
+  /* background-color: #fff5ee; */
   align-items: ba;
 `;
 const Left = styled.div`

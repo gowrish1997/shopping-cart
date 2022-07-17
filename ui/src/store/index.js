@@ -7,6 +7,7 @@ import { Orderreducer } from "./Order";
 import { persistReducer } from "redux-persist";
 import { wishlistreducer } from "./Wishlist";
 import { profilereducer } from "./Userprofile";
+import { modereducer } from "./darkmode";
 const persistConfig = {
   key: "root",
   storage,
@@ -44,5 +45,6 @@ export const store = configureStore({
     order: Orderreducer,
     wishlist: persistedwishlistReducer,
     userprofile: persistedprofile,
+    mode:modereducer
   },
 });

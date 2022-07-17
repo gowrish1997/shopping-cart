@@ -5,13 +5,15 @@ import LamaNavigation from "../components/LamaNavigation";
 import Accordian from "../Material_UI/Accordian";
 import { useSelector } from "react-redux";
 import { mobile } from "../components/responsive";
+
 const Container = styled.div`
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   height: 100vh;
+  overflow: auto;
 `;
 const Wrapper = styled.div`
   padding: 10px;
-  background-color: #f5f5f5;
+  /* background-color: #f5f5f5; */
   display: flex;
   flex-direction: row;
   ${mobile({flexDirection:"column-reverse"})}
@@ -21,7 +23,8 @@ const Info = styled.div`
 `;
 const PriceDetail = styled.div`
 height: 50vh;
-background-color: white;
+border: 1px solid ;
+border-color: ${(props)=>props.data.mode?'white':"black"};
 justify-content: center;
   flex: 1;
   display: flex;
@@ -58,6 +61,7 @@ border-bottom: 1px solid black;
 const MyOrder = () => {
   const selector = useSelector((state) => state.cart);
   const user=useSelector((state)=>state.user)
+  const data=useSelector((state)=>state.mode)
   console.log(selector.price)
   console.log(user)
   return (
@@ -67,7 +71,7 @@ const MyOrder = () => {
         <Info>
           <Accordian></Accordian>
         </Info>
-        <PriceDetail>
+        <PriceDetail data={data}>
           <Detail>PRICE DETAIL</Detail>
           <PriceStructure>
             <Details>

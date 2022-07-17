@@ -11,24 +11,29 @@ import Confirmlogout from "../components/Confirmlogout";
 import Paybutton from "../Stripe/Paybutton";
 import { useraddressactions } from "../store/Useraddress";
 import { useDispatch } from "react-redux";
+import { makeStyles } from "@material-ui/core";
+
 const AdressContainer = styled.div`
   margin-top: -40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: transparent;
+
 `;
 const Newaddress = styled.div`
   position: relative;
   background-color: red;
   background-color: transparent;
   z-index: 2;
+
 `;
 
 const ExistingAddress = styled.div`
   height: auto;
   padding: 10px;
   background-color: transparent;
+
 `;
 
 const WholeAdress = styled.div`
@@ -134,16 +139,23 @@ const Login = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-
+const useStyles=makeStyles({
+accordian:{
+  backgroundColor:"red",
+  color:props=>props?"white":"black",
+}
+})
 export default function Accordian() {
-  const [show, setshow] = useState(false);
+ const [show, setshow] = useState(false);
   const [addres, setAdress] = useState({ id: Math.random().toString() });
   const [addres1, setAdress1] = useState({});
   const [slice, setslice] = useState(5);
   const dispatch = useDispatch();
   const userAdresss = useSelector((state) => state.address);
   const user = useSelector((state) => state.user);
-  console.log(userAdresss.deliveryaddres);
+const data=useSelector((state)=>state.mode)
+const classes=useStyles(data.mode)
+
   const addres_length = userAdresss.addresses.length;
   const submithandler = (e, condition) => {
     e.preventDefault();
@@ -182,10 +194,11 @@ export default function Accordian() {
       return !prev
     })
   }
+  
   return (
     <div>
       {show && <Confirmlogout handler={Logoutmodel_handler}></Confirmlogout>}
-      <Accordion style={{ marginTop: "20px" }}>
+      <Accordion style={{ marginTop: "20px"}} className={classes.accordian} >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -351,7 +364,7 @@ export default function Accordian() {
           </AdressContainer>
         </AccordionDetails>
       </Accordion>
-      <Accordion style={{ marginTop: "20px" }}>
+      <Accordion style={{ marginTop: "20px" }} className={classes.accordian}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"

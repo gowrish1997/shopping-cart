@@ -1,13 +1,15 @@
 import { Send } from '@material-ui/icons'
 import React from 'react'
 import styled from 'styled-components'
+import { Paper } from '@material-ui/core'
 const Container =styled.div`
 display: flex;
 flex-direction: column;
-background-color: #FFDEAD;
+/* background-color: #FFDEAD; */
 height: 50vh;
 justify-content: center;
 align-items: center;
+border: 2px solid white;
 `
 const Title=styled.h1`
 `
@@ -30,6 +32,7 @@ flex: 1;
 `
 const Newsletter = () => {
   return (
+    <Paper>
    <Container>
        <Title>Newsletter</Title>
        <Desc>Check here for new product and new offer</Desc>
@@ -40,6 +43,7 @@ const Newsletter = () => {
        </Button>
        </Inputcontainer>
    </Container>
+   </Paper>
   )
 }
 export default Newsletter

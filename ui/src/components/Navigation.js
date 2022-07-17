@@ -6,6 +6,7 @@ import { Link, Route, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "./responsive";
 import Menubutton from "./menubutton";
+import Dark_mode from "../Material_UI/Dark_mode";
 const Container = styled.div`
   height: 60px;
 `;
@@ -38,6 +39,7 @@ const Searchcontainer = styled.div`
 `;
 const Input = styled.input`
   border: none;
+  background-color: transparent;
   ${mobile({ width: "50px" })}
   &:focus {
     outline: none;
@@ -68,6 +70,8 @@ const Right = styled.div`
   justify-content: flex-end;
   ${mobile({ flex: "1" })}
   ${mobile({ justifyContent: "flex-end" })}
+  align-items: center;
+
 `;
 const Menuitem = styled.div`
   margin-right: 15px;
@@ -79,6 +83,8 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const quantity = cartstate.quantity;
   return (
+
+   
     <Container>
       <Wrapper>
         <Left>
@@ -93,19 +99,21 @@ const Navigation = () => {
           <Menubutton></Menubutton>
         </Center>
         <Right>
+         
           {url.url!='/cart' &&  <Badge
             style={{ cursor: "pointer" }}
             badgeContent={quantity}
             color="primary"
           >
             <Link to="/cart">
-              <ShoppingCart></ShoppingCart>
+              <ShoppingCart style={{color:"teal"}}></ShoppingCart>
             </Link>
           </Badge> }
-         
+          <Dark_mode></Dark_mode>
         </Right>
       </Wrapper>
     </Container>
+    
   );
 };
 export default Navigation;

@@ -16,56 +16,76 @@ import Paybutton from "./Stripe/Paybutton";
 import MyOrder from "./pages/MyOrder";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
+import Navigation from "./components/Navigation";
+
 function App() {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.user);
-  console.log(selector)
+  const mode = useSelector((state) => state.mode);
+
+  const theme = createMuiTheme({
+    palette: {
+      type: mode.mode ? "dark" : "light",
+    },
+  });
   return (
-    <>
-      <Switch>
-        <Route path="/" exact>
-          {selector.user ? <Home></Home> : <Register></Register>}
-        </Route>
-        <Route path="/Products" exact>
-          {selector.user ? <Productlist></Productlist> : <Register></Register>}
-        </Route>
-        <Route path="/Products/:category">
-          {selector.user ? <Productlist></Productlist> : <Register></Register>}
-        </Route>
-        <Route path="/Product/:id">
-          {selector.user ? <Product></Product> : <Register></Register>}
-        </Route>
-        <Route path="/cart" exact>
-          {selector.user ? <Cart></Cart> : <Register></Register>}
-        </Route>
-        <Route path="/account/Order" exact>
-          {selector.user ? <Order></Order> : <Register></Register>}
-        </Route>
-        <Route path="/Cart/MyOrder" >
-          {selector.user ?<MyOrder></MyOrder>: <Register></Register> }
-        </Route>
-        <Route path="/account/wishlist" exact>
-          {selector.user ?<Wishlist></Wishlist>: <Register></Register> }
-        </Route>
-        <Route path="/account/userprofile">
-          {selector.user ?<Profile></Profile>: <Register></Register> }
-        </Route>
-        <Route path="/register">
-          {!selector.user ? (
-            <Register></Register>
-          ) : (
-            <Redirect to="/"></Redirect>
-          )}
-        </Route>
-        <Route path="/login">
-          {!selector.user ? <Login></Login> : <Redirect to="/"></Redirect>}
-        </Route>
-      
-        <Route path="/pay">
-          {selector.user ?<Paybutton></Paybutton>: <Register></Register> }
-        </Route>
-      </Switch>
-    </>
+    <ThemeProvider theme={theme}>
+      <Paper>
+        <Switch>
+          <Route path="/" exact>
+            {selector.user ? <Home></Home> : <Register></Register>}
+          </Route>
+          <Route path="/Products" exact>
+            {selector.user ? (
+              <Productlist></Productlist>
+            ) : (
+              <Register></Register>
+            )}
+          </Route>
+          <Route path="/Products/:category">
+            {selector.user ? (
+              <Productlist></Productlist>
+            ) : (
+              <Register></Register>
+            )}
+          </Route>
+          <Route path="/Product/:id">
+            {selector.user ? <Product></Product> : <Register></Register>}
+          </Route>
+          <Route path="/cart" exact>
+            {selector.user ? <Cart></Cart> : <Register></Register>}
+          </Route>
+          <Route path="/account/Order" exact>
+            {selector.user ? <Order></Order> : <Register></Register>}
+          </Route>
+          <Route path="/Cart/MyOrder">
+            {selector.user ? <MyOrder></MyOrder> : <Register></Register>}
+          </Route>
+          <Route path="/account/wishlist" exact>
+            {selector.user ? <Wishlist></Wishlist> : <Register></Register>}
+          </Route>
+          <Route path="/account/userprofile">
+            {selector.user ? <Profile></Profile> : <Register></Register>}
+          </Route>
+          <Route path="/register">
+            {!selector.user ? (
+              <Register></Register>
+            ) : (
+              <Redirect to="/"></Redirect>
+            )}
+          </Route>
+          <Route path="/login">
+            {!selector.user ? <Login></Login> : <Redirect to="/"></Redirect>}
+          </Route>
+
+          <Route path="/pay">
+            {selector.user ? <Paybutton></Paybutton> : <Register></Register>}
+          </Route>
+        </Switch>
+      </Paper>
+    </ThemeProvider>
   );
 }
 export default App;
